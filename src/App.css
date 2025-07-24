@@ -263,10 +263,14 @@ background: linear-gradient(90deg, rgba(14, 128, 173, 0.92) 0%, rgba(7, 145, 58,
   letter-spacing: 1px;
 }
 .cart-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
   background: #454545ea;
   color: #484848;
   border: none;
-  border-radius: 100px;
+  border-radius: 50px;
   padding: 0.2rem 0.2rem;
   font-size: 1.15rem;
   cursor: pointer;
