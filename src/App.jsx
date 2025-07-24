@@ -7,17 +7,33 @@ import './App.css'
 function App() {
   // Productos de ejemplo
   const productos = [
-    { id: 1, name: 'Manzana', price: 1.5 },
-    { id: 2, name: 'Leche', price: 2.3 },
-    { id: 3, name: 'Pan', price: 1.1 },
-    { id: 4, name: 'Queso', price: 3.8 },
-    { id: 5, name: 'Arroz', price: 2.0 },
+    { id: 1, name: 'Brahma', price: 1200, image: '/products/cerveza1.jpg' },
+    { id: 2, name: 'Heineken', price: 3000, image: '/products/cerveza2.jpg' },
+    { id: 3, name: 'Imperial Lata', price: 2500, image: '/products/ImperialLata.jpg' },
+    { id: 4, name: 'Queso', price: 380, image: '/products/queso.jpg' },
+    { id: 5, name: 'Arroz', price: 200, image: '/products/arroz.jpg' },
+    { id: 6, name: 'Pollo', price: 500, image: '/products/pollo.jpg' },
+    { id: 7, name: 'Carne molida', price: 650, image: '/products/carne-molida.jpg' },
+    { id: 8, name: 'Pasta', price: 180, image: '/products/pasta.jpg' },
+    { id: 9, name: 'Tomate', price: 90, image: '/products/tomate.jpg' },
+    { id: 10, name: 'Cebolla', price: 70, image: '/products/cebolla.jpg' },
+    { id: 11, name: 'Pimiento', price: 120, image: '/products/pimiento.jpg' },
+    { id: 12, name: 'Lechuga', price: 50, image: '/products/lechuga.jpg' },
+    { id: 13, name: 'Zanahoria', price: 0.6, image: '/products/zanahoria.jpg' },
+    { id: 14, name: 'Papas', price: 0.8, image: '/products/papas.jpg' },
+    { id: 15, name: 'Huevos', price: 2.5, image: '/products/huevos.jpg' },
+    { id: 16, name: 'Aceite', price: 3.0, image: '/products/aceite.jpg' },
+    { id: 17, name: 'Azúcar', price: 1.0, image: '/products/azucar.jpg' },
+    { id: 18, name: 'Sal', price: 0.3, image: '/products/sal.jpg' },
+    { id: 19, name: 'Harina', price: 1.4, image: '/products/harina.jpg' },
+    { id: 20, name: 'Cereal', price: 2.2, image: '/products/cereal.jpg' }
   ];
   const [cart, setCart] = useState([]);
   const [showCart, setShowCart] = useState(false);
   const [showForm, setShowForm] = useState(false);
   const [buyerName, setBuyerName] = useState('');
   const [buyerAddress, setBuyerAddress] = useState('');
+  const [search, setSearch] = useState('');
 
   const addToCart = (product) => setCart([...cart, product]);
   const removeFromCart = (idx) => setCart(cart.filter((_, i) => i !== idx));
@@ -44,13 +60,22 @@ function App() {
   return (
     <div style={{ maxWidth: 800, margin: '0 auto', padding: 0 }}>
       <Header onCartClick={() => setShowCart(true)} cartCount={cart.length} />
+      <div className="search-bar-container">
+        <input
+          type="text"
+          className="search-bar"
+          placeholder="Buscar productos..."
+          value={search}
+          onChange={e => setSearch(e.target.value)}
+        />
+      </div>
       <div className="banner">
         <span>¡Bienvenidos!</span>
       </div>
       <div className='banner2'>
         <span>Seleccione un producto para empezar a comprar</span>
       </div>
-      <ProductList products={productos} addToCart={addToCart} />
+      <ProductList products={productos.filter(p => p.name.toLowerCase().includes(search.toLowerCase()))} addToCart={addToCart} />
       {showCart && (
         <div className="modal-backdrop" onClick={() => setShowCart(false)}>
           <div className="modal-cart" onClick={e => e.stopPropagation()}>
