@@ -99,7 +99,7 @@ h1 {
 }
 
 .card, .product-card {
-  background: #fff;
+  background: #7c7c7c;
   border-radius: 12px;
   box-shadow: 0 2px 8px rgba(0,0,0,0.07);
   padding: 0.5rem;
@@ -148,7 +148,7 @@ h1 {
 }
 .product-card h3 {
   margin: 0.5rem 0 0.2rem 0;
-  color: #2b6cb0;
+  color: #000000;
   font-size: 1.2rem;
 }
 .product-card p {
@@ -157,7 +157,7 @@ h1 {
   font-size: 1.1rem;
 }
 .product-card button {
-  background: #3182ce;
+  background: #242424;
   color: #fff;
   border: none;
   border-radius: 6px;
@@ -168,7 +168,7 @@ h1 {
   transition: background 0.2s, transform 0.2s;
 }
 .product-card button:hover {
-  background: #2b6cb0;
+  background: #157c00;
   transform: scale(1.07);
 }
 
@@ -304,7 +304,20 @@ background: linear-gradient(90deg, rgba(42, 42, 42, 0.92) 0%, rgba(7, 145, 58, 0
   right: -18px;
   box-shadow: 0 1px 4px rgba(229,62,62,0.15);
 }
-
+.banner2 {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  background: linear-gradient(90deg, #113623cc 60%, #2f855acc 100%);
+  color: #ffffff;
+  text-align: center;
+  padding: 1.5rem 0;
+  font-size: 1.25rem;
+  font-weight: 700;
+  border-radius: 14px;
+  margin-bottom: 2.2rem;
+}
 .banner {
   display: flex;
   align-items: center;

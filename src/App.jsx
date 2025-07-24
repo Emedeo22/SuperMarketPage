@@ -47,6 +47,9 @@ function App() {
       <div className="banner">
         <span>¡Bienvenidos!</span>
       </div>
+      <div className='banner2'>
+        <span>Seleccione un producto para empezar a comprar</span>
+      </div>
       <ProductList products={productos} addToCart={addToCart} />
       {showCart && (
         <div className="modal-backdrop" onClick={() => setShowCart(false)}>
