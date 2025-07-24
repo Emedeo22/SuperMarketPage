@@ -225,20 +225,22 @@ background: linear-gradient(90deg, rgba(42, 42, 42, 0.92) 0%, rgba(7, 145, 58, 0
 .header-logo {
   width: 100px;
   height: 100px;
-  border-radius: 50%;
+  border-radius: 10%;
   object-fit: cover;
-  border: 2.5px solid #00fff7;
-  box-shadow: 0 2px 8px #00fff799;
+  border: 2.5px solid #3e3e3e;
+  box-shadow: 0 2px 8px #00ff6a99;
   background: #232526;
 }
-@media (max-width: 600px) {
+@media (max-width: 500px) {
   .header-actions {
     flex-direction: column;
+    align-items: center;
     gap: 0.7rem;
   }
   .header-logo {
-    width: 64px;
-    height: 64px;
+    width: 44px;
+    height: 44px;
+    
   }
 }
 
@@ -316,7 +318,7 @@ background: linear-gradient(90deg, rgba(42, 42, 42, 0.92) 0%, rgba(7, 145, 58, 0
   font-weight: 700;
   border-radius: 14px;
   margin-bottom: 2.2rem;
-  box-shadow: 0 2px 8px rgba(167, 167, 167, 0.1);
+  box-shadow: 0 2px 8px rgb(60, 60, 60);
   letter-spacing: 0.5px;
   position: relative;
   min-height: 120px;
@@ -325,13 +327,20 @@ background: linear-gradient(90deg, rgba(42, 42, 42, 0.92) 0%, rgba(7, 145, 58, 0
   display: none;
 }
 .banner span {
-  background: rgba(44, 62, 80, 0.65);
+  background: rgba(0, 0, 0, 0.65);
   padding: 0.7rem 1.5rem;
   border-radius: 8px;
   font-size: 1.25rem;
   box-shadow: 0 1px 4px rgba(0,0,0,0.10);
 }
-
+@media (max-width: 900px) {
+  .banner {
+    font-size: 1.05rem;
+    padding: 1.2rem 0;
+    min-height: 80px;
+    color: #fff;
+  }
+}
 @media (max-width: 900px) {
   .product-list-grid {
     gap: 1.2rem;
