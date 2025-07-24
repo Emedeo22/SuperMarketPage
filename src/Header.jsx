@@ -12,7 +12,8 @@ function Header({ onCartClick, cartCount }) {
           🛒
           {cartCount > 0 && <span className="cart-badge">{cartCount}</span>}
         </button>
-        <img src="./src/assets/img/logo.jpeg" alt="Logo" className="header-logo" />
+        <img src="/logo.jpeg" alt="Logo" className="header-logo" />
+        {/* The image path should be relative to the public folder or use a proper import statement */}
       </div>
     </header>
   );
