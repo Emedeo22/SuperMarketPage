@@ -19,7 +19,7 @@ function Cart({ cart, removeFromCart, sendCartToWhatsApp }) {
           ))}
         </ul>
       )}
-      <p><b>Total: ${total.toFixed(2)}</b></p>
+      <p className="cart-total"><b>Total: ${total.toFixed(2)}</b></p>
       <button onClick={sendCartToWhatsApp} disabled={cart.length === 0}>
         Enviar carrito por WhatsApp
       </button>
