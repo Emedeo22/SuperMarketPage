@@ -238,8 +238,8 @@ background: linear-gradient(90deg, rgba(42, 42, 42, 0.92) 0%, rgba(7, 145, 58, 0
     gap: 0.7rem;
   }
   .header-logo {
-    width: 64px;
-    height: 64px;
+    width: 12rem;
+    height: 11rem;
     
   }
 }
@@ -327,6 +327,7 @@ background: linear-gradient(90deg, rgba(42, 42, 42, 0.92) 0%, rgba(7, 145, 58, 0
   display: none;
 }
 .banner span {
+  color: #ffffff;
   background: rgba(0, 0, 0, 0.65);
   padding: 0.7rem 1.5rem;
   border-radius: 8px;
@@ -443,7 +444,7 @@ background: linear-gradient(90deg, rgba(42, 42, 42, 0.92) 0%, rgba(7, 145, 58, 0
     color: #8a8a8a;
   }
    span {
-    color: #666c76;
+    color: #ffffff;
     font-size: 1.5rem;
     margin: 0.2rem 0 0.2rem 0;
   }
