@@ -12,7 +12,7 @@ function Header({ onCartClick, cartCount }) {
           🛒
           {cartCount > 0 && <span className="cart-badge">{cartCount}</span>}
         </button>
-        <img src="/src/assets/img/logo.jpeg" alt="Logo" className="header-logo" />
+        <img src="./src/assets/img/logo.jpeg" alt="Logo" className="header-logo" />
       </div>
     </header>
   );
