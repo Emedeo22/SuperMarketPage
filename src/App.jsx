@@ -5,28 +5,39 @@ import Header from './Header'
 import './App.css'
 
 function App() {
+//categorias
+ const categorias = [
+    'Todas',
+    'Cervezas',
+    'Lácteos',
+    'Carnes',
+    'Verduras',
+    'Huevos y Granos',
+    'Aceites y Condimentos',
+    'Otros'
+  ];
   // Productos de ejemplo
   const productos = [
-    { id: 1, name: 'Brahma', price: 1200, image: '/products/cerveza1.jpg' },
-    { id: 2, name: 'Heineken', price: 3000, image: '/products/cerveza2.jpg' },
-    { id: 3, name: 'Imperial Lata', price: 2500, image: '/products/ImperialLata.jpg' },
-    { id: 4, name: 'Queso', price: 380, image: '/products/queso.jpg' },
-    { id: 5, name: 'Arroz', price: 200, image: '/products/arroz.jpg' },
-    { id: 6, name: 'Pollo', price: 500, image: '/products/pollo.jpg' },
-    { id: 7, name: 'Carne molida', price: 650, image: '/products/carne-molida.jpg' },
-    { id: 8, name: 'Pasta', price: 180, image: '/products/pasta.jpg' },
-    { id: 9, name: 'Tomate', price: 90, image: '/products/tomate.jpg' },
-    { id: 10, name: 'Cebolla', price: 70, image: '/products/cebolla.jpg' },
-    { id: 11, name: 'Pimiento', price: 120, image: '/products/pimiento.jpg' },
-    { id: 12, name: 'Lechuga', price: 50, image: '/products/lechuga.jpg' },
-    { id: 13, name: 'Zanahoria', price: 0.6, image: '/products/zanahoria.jpg' },
-    { id: 14, name: 'Papas', price: 0.8, image: '/products/papas.jpg' },
-    { id: 15, name: 'Huevos', price: 2.5, image: '/products/huevos.jpg' },
-    { id: 16, name: 'Aceite', price: 3.0, image: '/products/aceite.jpg' },
-    { id: 17, name: 'Azúcar', price: 1.0, image: '/products/azucar.jpg' },
-    { id: 18, name: 'Sal', price: 0.3, image: '/products/sal.jpg' },
-    { id: 19, name: 'Harina', price: 1.4, image: '/products/harina.jpg' },
-    { id: 20, name: 'Cereal', price: 2.2, image: '/products/cereal.jpg' }
+    { id: 1, name: 'Brahma', price: 1200, image: '/products/cerveza1.jpg', category: 'Cervezas' },
+    { id: 2, name: 'Heineken', price: 3000, image: '/products/cerveza2.jpg', category: 'Cervezas' },
+    { id: 3, name: 'Imperial Lata', price: 2500, image: '/products/ImperialLata.jpg', category: 'Cervezas' },
+    { id: 4, name: 'Queso', price: 380, image: '/products/queso.jpg', category: 'Lácteos' },
+    { id: 5, name: 'Arroz', price: 200, image: '/products/arroz.jpg', category: 'Huevos y Granos' },
+    { id: 6, name: 'Pollo', price: 500, image: '/products/pollo.jpg', category: 'Carnes' },
+    { id: 7, name: 'Carne molida', price: 650, image: '/products/carne-molida.jpg', category: 'Carnes' },
+    { id: 8, name: 'Pasta', price: 180, image: '/products/pasta.jpg', category: 'Otros' },
+    { id: 9, name: 'Tomate', price: 90, image: '/products/tomate.jpg', category: 'Verduras' },
+    { id: 10, name: 'Cebolla', price: 70, image: '/products/cebolla.jpg', category: 'Verduras' },
+    { id: 11, name: 'Pimiento', price: 120, image: '/products/pimiento.jpg', category: 'Verduras' },
+    { id: 12, name: 'Lechuga', price: 50, image: '/products/lechuga.jpg', category: 'Verduras' },
+    { id: 13, name: 'Zanahoria', price: 0.6, image: '/products/zanahoria.jpg', category: 'Verduras' },
+    { id: 14, name: 'Papas', price: 0.8, image: '/products/papas.jpg', category: 'Verduras' },
+    { id: 15, name: 'Huevos', price: 2.5, image: '/products/huevos.jpg', category: 'Huevos y Granos' },
+    { id: 16, name: 'Aceite', price: 3.0, image: '/products/aceite.jpg', category: 'Aceites y Condimentos' },
+    { id: 17, name: 'Azúcar', price: 1.0, image: '/products/azucar.jpg', category: 'Otros' },
+    { id: 18, name: 'Sal', price: 0.3, image: '/products/sal.jpg', category: 'Aceites y Condimentos' },
+    { id: 19, name: 'Harina', price: 1.4, image: '/products/harina.jpg', category: 'Otros' },
+    { id: 20, name: 'Cereal', price: 2.2, image: '/products/cereal.jpg', category: 'Otros' }
   ];
   const [cart, setCart] = useState([]);
   const [showCart, setShowCart] = useState(false);
@@ -34,6 +45,8 @@ function App() {
   const [buyerName, setBuyerName] = useState('');
   const [buyerAddress, setBuyerAddress] = useState('');
   const [search, setSearch] = useState('');
+  const [selectedCategory, setSelectedCategory] = useState('Todas');
+
 
   const addToCart = (product) => setCart([...cart, product]);
   const removeFromCart = (idx) => setCart(cart.filter((_, i) => i !== idx));
@@ -60,6 +73,28 @@ function App() {
   return (
     <div style={{ maxWidth: 800, margin: '0 auto', padding: 0 }}>
       <Header onCartClick={() => setShowCart(true)} cartCount={cart.length} />
+        <div className="category-bar-container" style={{display:'flex', flexWrap:'wrap', gap:'0.5rem', justifyContent:'center', margin:'1.2rem 0'}}>
+        {categorias.map(cat => (
+          <button
+            key={cat}
+            className={`category-btn${selectedCategory === cat ? ' selected' : ''}`}
+            style={{
+              background: selectedCategory === cat ? '#0000004e' : '#a9a9a9ff',
+              color: selectedCategory === cat ? '#fff' : '#232526',
+              border: 'none',
+              borderRadius: 5,
+              padding: '0.5rem 1.2rem',
+              fontWeight: 500,
+              cursor: 'pointer',
+              boxShadow: selectedCategory === cat ? '0 2px 8px #2c2d2c33' : '0 1px 4px #0001',
+              transition: 'all 0.2s'
+            }}
+            onClick={() => setSelectedCategory(cat)}
+          >
+            {cat}
+          </button>
+        ))}
+      </div>
       <div className="search-bar-container">
         <input
           type="text"
@@ -75,7 +110,16 @@ function App() {
       <div className='banner2'>
         <span>Seleccione un producto para empezar a comprar</span>
       </div>
-      <ProductList products={productos.filter(p => p.name.toLowerCase().includes(search.toLowerCase()))} addToCart={addToCart} />
+      <ProductList
+        products={
+          productos
+            .filter(p =>
+              (selectedCategory === 'Todas' || p.category === selectedCategory)
+            )
+            .filter(p => p.name.toLowerCase().includes(search.toLowerCase()))
+        }
+        addToCart={addToCart}
+      />
       {showCart && (
         <div className="modal-backdrop" onClick={() => setShowCart(false)}>
           <div className="modal-cart" onClick={e => e.stopPropagation()}>
