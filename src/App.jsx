@@ -1,7 +1,6 @@
 import { useState } from 'react'
 import ProductList from './ProductList'
 import Cart from './Cart'
-import { Analytics } from "@vercel/analytics/next"
 import Header from './Header'
 import './App.css'
 
