@@ -25,11 +25,11 @@ function App() {
     { id: 4, name: 'Imperial IPA 473ml', price: 1500, image: '/products/imperialIPA430.jpg', category: 'Cervezas', promo: true },
     { id: 5, name: 'Imperial Lata 710ml', price: 2500, image: '/products/ImprerialLata710Promo.jpg', category: 'Cervezas', promo: true },
     { id: 6, name: 'Nuggets de Pollo Sadia Crocantes', price: 4200, image: '/products/nuggetsPromo.jpg', category: 'Carnes', promo: true },
-    { id: 7, name: 'Carne molida', price: 650, image: '/products/carne-molida.jpg', category: 'Carnes' },
-    { id: 8, name: 'Pasta', price: 180, image: '/products/pasta.jpg', category: 'Otros' },
+    { id: 7, name: 'Milanesas De Ternera x Kg', price: 14900, image: '/products/MilanesaDeTerneraxKgPromo.jpg', category: 'Carnes', promo: true },
+    { id: 8, name: 'Milanesa De Pollo x Kg', price: 14900, image: '/products/MilanesaDePolloxKgPromo.jpg', category: 'Carnes', promo: true },
     { id: 9, name: 'Quilmes 710ml', price: 2500, image: '/products/quilmes710Promo.jpg', category: 'Cervezas', promo: true },
-    { id: 10, name: 'Cebolla', price: 70, image: '/products/cebolla.jpg', category: 'Verduras' },
-    { id: 11, name: 'Pimiento', price: 120, image: '/products/pimiento.jpg', category: 'Verduras' },
+    { id: 10, name: 'Matambre de Ternera x Kg', price: 14900, image: '/products/MatambreDeTerneraxKgPromo.jpg', category: 'Verduras', promo: true },
+    { id: 11, name: 'Lomo De Ternera x Kg', price: 19900, image: '/products/LomoDeTerneraxKgPromo.jpg', category: 'Verduras', promo: true },
     { id: 12, name: 'Lechuga', price: 50, image: '/products/lechuga.jpg', category: 'Verduras' },
     { id: 13, name: 'Zanahoria', price: 0.6, image: '/products/zanahoria.jpg', category: 'Verduras' },
     { id: 14, name: 'Papas', price: 0.8, image: '/products/papas.jpg', category: 'Verduras' },
@@ -193,14 +193,14 @@ function App() {
                       <span style={{margin:'0 8px', fontWeight:500}}>x{item.cantidad || 1}</span>
                       <span style={{fontWeight:500, color:'#c60000ff'}}>${(item.price * (item.cantidad || 1)).toFixed(2)}</span>
                       <button
-                        style={{marginLeft:8, padding:'2px 8px', background:'#252424ff', border:'1px solid #bbb', borderRadius:4, cursor:'pointer'}}
+                        style={{marginLeft:8, padding:'2px 8px', background:'#252424ff', color:'#fff', border:'1px solid #bbb', borderRadius:4, cursor:'pointer'}}
                         aria-label={`Quitar una unidad de ${item.name}`}
                         tabIndex={0}
                         onKeyDown={e => (e.key === 'Enter' || e.key === ' ') && decrementFromCart(item.id)}
                         onClick={() => decrementFromCart(item.id)}
                       >-</button>
                       <button
-                        style={{marginLeft:4, padding:'2px 8px', background:'#252424ff', border:'1px solid #bbb', borderRadius:4, cursor:'pointer'}}
+                        style={{marginLeft:4, padding:'2px 8px', background:'#252424ff', color:'#fff', border:'1px solid #bbb', borderRadius:4, cursor:'pointer'}}
                         aria-label={`Agregar una unidad de ${item.name}`}
                         tabIndex={0}
                         onKeyDown={e => (e.key === 'Enter' || e.key === ' ') && addToCart(item)}
