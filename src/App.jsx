@@ -18,16 +18,16 @@ function App() {
   ];
   // Productos de ejemplo
   const productos = [
-    { id: 1, name: 'Brahma 430ml', price: 1200, image: '/products/brahamaPromo.jpg', category: 'Cervezas', promo: true },
-    { id: 2, name: 'Heineken 430ml', price: 2200, image: '/products/heineken430Promo.jpg', category: 'Cervezas', promo: true },
-    { id: 3, name: 'Imperial Lata 430ml', price: 1400, image: '/products/imperialLata430Promo.jpg', category: 'Cervezas', promo: true },
+    { id: 1, name: 'Brahma 473ml', price: 1200, image: '/products/brahamaPromo.jpg', category: 'Cervezas', promo: true },
+    { id: 2, name: 'Heineken 473ml', price: 2200, image: '/products/heineken430Promo.jpg', category: 'Cervezas', promo: true },
+    { id: 3, name: 'Imperial Lata 473ml', price: 1400, image: '/products/imperialLata430Promo.jpg', category: 'Cervezas', promo: true },
 
-    { id: 4, name: 'Imperial IPA 430ml', price: 1500, image: '/products/imperialIPA430.jpg', category: 'Cervezas', promo: true },
+    { id: 4, name: 'Imperial IPA 473ml', price: 1500, image: '/products/imperialIPA430.jpg', category: 'Cervezas', promo: true },
     { id: 5, name: 'Imperial Lata 710ml', price: 2500, image: '/products/ImprerialLata710Promo.jpg', category: 'Cervezas', promo: true },
     { id: 6, name: 'Nuggets de Pollo Sadia Crocantes', price: 4200, image: '/products/nuggetsPromo.jpg', category: 'Carnes', promo: true },
-    { id: 7, name: 'Carne molida 430ml', price: 650, image: '/products/carne-molida.jpg', category: 'Carnes' },
-    { id: 8, name: 'Pasta 430ml', price: 180, image: '/products/pasta.jpg', category: 'Otros' },
-    { id: 9, name: 'Quilmes 710', price: 2500, image: '/products/quilmes710Promo.jpg', category: 'Cervezas', promo: true },
+    { id: 7, name: 'Carne molida', price: 650, image: '/products/carne-molida.jpg', category: 'Carnes' },
+    { id: 8, name: 'Pasta', price: 180, image: '/products/pasta.jpg', category: 'Otros' },
+    { id: 9, name: 'Quilmes 710ml', price: 2500, image: '/products/quilmes710Promo.jpg', category: 'Cervezas', promo: true },
     { id: 10, name: 'Cebolla', price: 70, image: '/products/cebolla.jpg', category: 'Verduras' },
     { id: 11, name: 'Pimiento', price: 120, image: '/products/pimiento.jpg', category: 'Verduras' },
     { id: 12, name: 'Lechuga', price: 50, image: '/products/lechuga.jpg', category: 'Verduras' },
