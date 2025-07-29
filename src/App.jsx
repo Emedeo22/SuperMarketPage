@@ -7,7 +7,7 @@ import './App.css'
 function App() {
 //categorias
  const categorias = [
-    'Todas',
+    'Promociones', // Nueva categoría para promos
     'Cervezas',
     'Lácteos',
     'Carnes',
@@ -18,25 +18,26 @@ function App() {
   ];
   // Productos de ejemplo
   const productos = [
-    { id: 1, name: 'Brahma', price: 1200, image: '/products/cerveza1.jpg', category: 'Cervezas' },
-    { id: 2, name: 'Heineken', price: 3000, image: '/products/cerveza2.jpg', category: 'Cervezas' },
-    { id: 3, name: 'Imperial Lata', price: 2500, image: '/products/ImperialLata.jpg', category: 'Cervezas' },
-    { id: 4, name: 'Queso', price: 380, image: '/products/queso.jpg', category: 'Lácteos' },
-    { id: 5, name: 'Arroz', price: 200, image: '/products/arroz.jpg', category: 'Huevos y Granos' },
-    { id: 6, name: 'Pollo', price: 500, image: '/products/pollo.jpg', category: 'Carnes' },
-    { id: 7, name: 'Carne molida', price: 650, image: '/products/carne-molida.jpg', category: 'Carnes' },
-    { id: 8, name: 'Pasta', price: 180, image: '/products/pasta.jpg', category: 'Otros' },
-    { id: 9, name: 'Tomate', price: 90, image: '/products/tomate.jpg', category: 'Verduras' },
+    { id: 1, name: 'Brahma 430ml', price: 1200, image: '/products/brahamaPromo.jpg', category: 'Cervezas', promo: true },
+    { id: 2, name: 'Heineken 430ml', price: 2200, image: '/products/heineken430Promo.jpg', category: 'Cervezas', promo: true },
+    { id: 3, name: 'Imperial Lata 430ml', price: 1400, image: '/products/imperialLata430Promo.jpg', category: 'Cervezas', promo: true },
+
+    { id: 4, name: 'Imperial IPA 430ml', price: 1500, image: '/products/imperialIPA430.jpg', category: 'Cervezas', promo: true },
+    { id: 5, name: 'Imperial Lata 710ml', price: 2500, image: '/products/ImprerialLata710Promo.jpg', category: 'Cervezas', promo: true },
+    { id: 6, name: 'Nuggets de Pollo Sadia Crocantes', price: 4200, image: '/products/nuggetsPromo.jpg', category: 'Carnes', promo: true },
+    { id: 7, name: 'Carne molida 430ml', price: 650, image: '/products/carne-molida.jpg', category: 'Carnes' },
+    { id: 8, name: 'Pasta 430ml', price: 180, image: '/products/pasta.jpg', category: 'Otros' },
+    { id: 9, name: 'Quilmes 710', price: 2500, image: '/products/quilmes710Promo.jpg', category: 'Cervezas', promo: true },
     { id: 10, name: 'Cebolla', price: 70, image: '/products/cebolla.jpg', category: 'Verduras' },
     { id: 11, name: 'Pimiento', price: 120, image: '/products/pimiento.jpg', category: 'Verduras' },
     { id: 12, name: 'Lechuga', price: 50, image: '/products/lechuga.jpg', category: 'Verduras' },
     { id: 13, name: 'Zanahoria', price: 0.6, image: '/products/zanahoria.jpg', category: 'Verduras' },
     { id: 14, name: 'Papas', price: 0.8, image: '/products/papas.jpg', category: 'Verduras' },
-    { id: 15, name: 'Huevos', price: 2.5, image: '/products/huevos.jpg', category: 'Huevos y Granos' },
+    { id: 15, name: 'Maple de Huevos', price: 6500, image: '/products/HuevoPromo.jpg', category: 'Huevos y Granos', promo: true },
     { id: 16, name: 'Aceite', price: 3.0, image: '/products/aceite.jpg', category: 'Aceites y Condimentos' },
     { id: 17, name: 'Azúcar', price: 1.0, image: '/products/azucar.jpg', category: 'Otros' },
     { id: 18, name: 'Sal', price: 0.3, image: '/products/sal.jpg', category: 'Aceites y Condimentos' },
-    { id: 19, name: 'Harina', price: 1.4, image: '/products/harina.jpg', category: 'Otros' },
+    { id: 19, name: 'Harina Cañuelas', price: 1.4, image: '/products/harinaCañuelasPromo.jpg', category: 'Otros', promo: true },
     { id: 20, name: 'Cereal', price: 2.2, image: '/products/cereal.jpg', category: 'Otros' }
   ];
   const [cart, setCart] = useState([]);
@@ -70,10 +71,22 @@ function App() {
     setBuyerAddress('');
   };
 
+  // Filtrado de productos
+  const productosFiltrados = productos
+    .filter(producto => {
+      // Si la categoría seleccionada es "Promociones", mostrar solo productos en promo
+      if (selectedCategory === 'Promociones') return producto.promo === true;
+      // Si es otra categoría, mostrar productos de esa categoría
+      if (selectedCategory && selectedCategory !== 'Todas') return producto.category === selectedCategory;
+      // Si es "Todas" o no hay categoría seleccionada, mostrar solo promociones
+      return producto.promo === true;
+    })
+    .filter(p => p.name.toLowerCase().includes(search.toLowerCase()));
+
   return (
     <div style={{ maxWidth: 800, margin: '0 auto', padding: 0 }}>
       <Header onCartClick={() => setShowCart(true)} cartCount={cart.length} />
-        <div className="category-bar-container" style={{display:'flex', flexWrap:'wrap', gap:'0.5rem', justifyContent:'center', margin:'1.2rem 0'}}>
+      <div className="category-bar-container" style={{display:'flex', flexWrap:'wrap', gap:'0.5rem', justifyContent:'center', margin:'1.2rem 0'}}>
         {categorias.map(cat => (
           <button
             key={cat}
@@ -111,13 +124,7 @@ function App() {
         <span>Seleccione un producto para empezar a comprar</span>
       </div>
       <ProductList
-        products={
-          productos
-            .filter(p =>
-              (selectedCategory === 'Todas' || p.category === selectedCategory)
-            )
-            .filter(p => p.name.toLowerCase().includes(search.toLowerCase()))
-        }
+        products={productosFiltrados}
         addToCart={addToCart}
       />
       {showCart && (
