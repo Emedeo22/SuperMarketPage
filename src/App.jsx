@@ -120,6 +120,7 @@ function App() {
     .filter(p => p.name.toLowerCase().includes(search.toLowerCase()));
 
   return (
+    
     <div style={{ maxWidth: 800, margin: '0 auto', padding: 0 }}>
       <Header onCartClick={() => setShowCart(true)} cartCount={cart.length} />
       <div className="category-bar-container" style={{display:'flex', flexWrap:'wrap', gap:'0.5rem', justifyContent:'center', margin:'1.2rem 0'}}>
@@ -144,6 +145,7 @@ function App() {
           </button>
         ))}
       </div>
+      <Analytics/>
       <div className="search-bar-container">
         <input
           type="text"
