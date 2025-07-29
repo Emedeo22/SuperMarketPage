@@ -21,7 +21,6 @@ function App() {
     { id: 1, name: 'Brahma 473ml', price: 1200, image: '/products/brahamaPromo.jpg', category: 'Cervezas', promo: true },
     { id: 2, name: 'Heineken 473ml', price: 2200, image: '/products/heineken430Promo.jpg', category: 'Cervezas', promo: true },
     { id: 3, name: 'Imperial Lata 473ml', price: 1400, image: '/products/imperialLata430Promo.jpg', category: 'Cervezas', promo: true },
-
     { id: 4, name: 'Imperial IPA 473ml', price: 1500, image: '/products/imperialIPA430.jpg', category: 'Cervezas', promo: true },
     { id: 5, name: 'Imperial Lata 710ml', price: 2500, image: '/products/ImprerialLata710Promo.jpg', category: 'Cervezas', promo: true },
     { id: 6, name: 'Nuggets de Pollo Sadia Crocantes', price: 4200, image: '/products/nuggetsPromo.jpg', category: 'Carnes', promo: true },
@@ -30,14 +29,14 @@ function App() {
     { id: 9, name: 'Quilmes 710ml', price: 2500, image: '/products/quilmes710Promo.jpg', category: 'Cervezas', promo: true },
     { id: 10, name: 'Matambre de Ternera x Kg', price: 14900, image: '/products/MatambreDeTerneraxKgPromo.jpg', category: 'Verduras', promo: true },
     { id: 11, name: 'Lomo De Ternera x Kg', price: 19900, image: '/products/LomoDeTerneraxKgPromo.jpg', category: 'Verduras', promo: true },
-    { id: 12, name: 'Lechuga', price: 50, image: '/products/lechuga.jpg', category: 'Verduras' },
+    { id: 12, name: '4 Panes de hamburguesas Artesanales, 4 medallones de carne ', price: 7000, image: '/products/PromoHambur.jpg', category: 'Otros', promo: true },
     { id: 13, name: 'Zanahoria', price: 0.6, image: '/products/zanahoria.jpg', category: 'Verduras' },
     { id: 14, name: 'Papas', price: 0.8, image: '/products/papas.jpg', category: 'Verduras' },
     { id: 15, name: 'Maple de Huevos', price: 6500, image: '/products/HuevoPromo.jpg', category: 'Huevos y Granos', promo: true },
     { id: 16, name: 'Aceite', price: 3.0, image: '/products/aceite.jpg', category: 'Aceites y Condimentos' },
     { id: 17, name: 'Azúcar', price: 1.0, image: '/products/azucar.jpg', category: 'Otros' },
     { id: 18, name: 'Sal', price: 0.3, image: '/products/sal.jpg', category: 'Aceites y Condimentos' },
-    { id: 19, name: 'Harina Cañuelas', price: 1.4, image: '/products/harinaCañuelasPromo.jpg', category: 'Otros', promo: true },
+    { id: 19, name: 'Harina Cañuelas', price: 800, image: '/products/harinaCañuelasPromo.jpg', category: 'Otros', promo: true },
     { id: 20, name: 'Cereal', price: 2.2, image: '/products/cereal.jpg', category: 'Otros' }
   ];
   // El carrito ahora almacena productos con cantidad
