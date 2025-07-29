@@ -40,6 +40,7 @@ function App() {
     { id: 19, name: 'Harina Cañuelas', price: 1.4, image: '/products/harinaCañuelasPromo.jpg', category: 'Otros', promo: true },
     { id: 20, name: 'Cereal', price: 2.2, image: '/products/cereal.jpg', category: 'Otros' }
   ];
+  // El carrito ahora almacena productos con cantidad
   const [cart, setCart] = useState([]);
   const [showCart, setShowCart] = useState(false);
   const [showForm, setShowForm] = useState(false);
@@ -49,7 +50,42 @@ function App() {
   const [selectedCategory, setSelectedCategory] = useState('Todas');
 
 
-  const addToCart = (product) => setCart([...cart, product]);
+  // Agregar producto al carrito, incrementando cantidad si ya existe
+  const addToCart = (product) => {
+    setCart(prevCart => {
+      const idx = prevCart.findIndex(p => p.id === product.id);
+      if (idx !== -1) {
+        // Si ya está, incrementar cantidad
+        const updated = [...prevCart];
+        updated[idx] = { ...updated[idx], cantidad: (updated[idx].cantidad || 1) + 1 };
+        return updated;
+      } else {
+        // Si no está, agregar con cantidad 1
+        return [...prevCart, { ...product, cantidad: 1 }];
+      }
+    });
+  };
+
+  // Decrementar cantidad o eliminar producto
+  const decrementFromCart = (productId) => {
+    setCart(prevCart => {
+      const idx = prevCart.findIndex(p => p.id === productId);
+      if (idx !== -1) {
+        const updated = [...prevCart];
+        if ((updated[idx].cantidad || 1) > 1) {
+          updated[idx] = { ...updated[idx], cantidad: updated[idx].cantidad - 1 };
+          return updated;
+        } else {
+          // Si la cantidad es 1, eliminar
+          updated.splice(idx, 1);
+          return updated;
+        }
+      }
+      return prevCart;
+    });
+  };
+
+  // Eliminar producto completamente
   const removeFromCart = (idx) => setCart(cart.filter((_, i) => i !== idx));
 
   const handleSendClick = () => {
@@ -59,8 +95,8 @@ function App() {
   const handleFormSubmit = (e) => {
     e.preventDefault();
     // Lista de compra en formato de lista
-    const items = cart.map(item => `• ${item.name} ($${item.price.toFixed(2)})`).join('%0A');
-    const total = cart.reduce((sum, item) => sum + item.price, 0).toFixed(2);
+    const items = cart.map(item => `• ${item.name} x${item.cantidad || 1} ($${(item.price * (item.cantidad || 1)).toFixed(2)})`).join('%0A');
+    const total = cart.reduce((sum, item) => sum + item.price * (item.cantidad || 1), 0).toFixed(2);
     const whatsappNumber = '5492942532819';
     // Codificar el mensaje para URL
     const message = encodeURIComponent(`¡Hola! Quiero comprar:\n\nLista de compra:\n${items}\n\nTotal: $${total}\n\nDatos del comprador:\nNombre: ${buyerName}\nDirección: ${buyerAddress}`);
@@ -128,10 +164,77 @@ function App() {
         addToCart={addToCart}
       />
       {showCart && (
-        <div className="modal-backdrop" onClick={() => setShowCart(false)}>
-          <div className="modal-cart" onClick={e => e.stopPropagation()}>
-            <Cart cart={cart} removeFromCart={removeFromCart} sendCartToWhatsApp={handleSendClick} />
-            <button className="close-modal" onClick={() => setShowCart(false)}>Cerrar</button>
+        <div className="modal-backdrop" onClick={() => setShowCart(false)} role="dialog" aria-modal="true" aria-label="Carrito de compras" tabIndex={-1}>
+          <div
+            className="modal-cart"
+            onClick={e => e.stopPropagation()}
+            style={{
+              maxHeight: '90vh',
+              width: '100%',
+              maxWidth: 400,
+              overflow: 'hidden',
+              display: 'flex',
+              flexDirection: 'column',
+              background: '#fff',
+              borderRadius: 12,
+              boxShadow: '0 4px 24px #0003',
+              outline: 'none',
+            }}
+            tabIndex={0}
+            aria-labelledby="cart-title"
+          >
+            <div style={{ flex: 1, overflowY: 'auto', marginBottom: 8 }}>
+              <h3 id="cart-title" style={{marginBottom: '1rem', fontSize: '1.3rem', color: '#232526'}}>Carrito</h3>
+              {cart.length === 0 ? <div>El carrito está vacío</div> : (
+                <ul style={{padding:0, margin:0, listStyle:'none'}}>
+                  {cart.map((item, idx) => (
+                    <li key={item.id} style={{display:'flex', alignItems:'center', justifyContent:'space-between', marginBottom:8, borderBottom:'1px solid #eee', paddingBottom:4}}>
+                      <span style={{flex:1, fontWeight:500, color:'#232526'}}>{item.name}</span>
+                      <span style={{margin:'0 8px', fontWeight:500}}>x{item.cantidad || 1}</span>
+                      <span style={{fontWeight:500, color:'#c60000ff'}}>${(item.price * (item.cantidad || 1)).toFixed(2)}</span>
+                      <button
+                        style={{marginLeft:8, padding:'2px 8px', background:'#252424ff', border:'1px solid #bbb', borderRadius:4, cursor:'pointer'}}
+                        aria-label={`Quitar una unidad de ${item.name}`}
+                        tabIndex={0}
+                        onKeyDown={e => (e.key === 'Enter' || e.key === ' ') && decrementFromCart(item.id)}
+                        onClick={() => decrementFromCart(item.id)}
+                      >-</button>
+                      <button
+                        style={{marginLeft:4, padding:'2px 8px', background:'#252424ff', border:'1px solid #bbb', borderRadius:4, cursor:'pointer'}}
+                        aria-label={`Agregar una unidad de ${item.name}`}
+                        tabIndex={0}
+                        onKeyDown={e => (e.key === 'Enter' || e.key === ' ') && addToCart(item)}
+                        onClick={() => addToCart(item)}
+                      >+</button>
+                      <button
+                        style={{marginLeft:4, padding:'2px 8px', color:'#fff', background:'#d00', border:'none', borderRadius:4, cursor:'pointer'}}
+                        aria-label={`Eliminar ${item.name} del carrito`}
+                        tabIndex={0}
+                        onKeyDown={e => (e.key === 'Enter' || e.key === ' ') && removeFromCart(idx)}
+                        onClick={() => removeFromCart(idx)}
+                      >x</button>
+                    </li>
+                  ))}
+                </ul>
+              )}
+            </div>
+            <div style={{ position: 'sticky', bottom: 0, background: '#fff', padding: '8px 0', boxShadow: '0 -2px 8px #0001', zIndex: 2 }}>
+              <div style={{marginBottom:8, fontWeight:700, color:'#232526'}}>Total: ${cart.reduce((sum, item) => sum + item.price * (item.cantidad || 1), 0).toFixed(2)}</div>
+              <button
+                className="close-modal"
+                style={{width: '100%', marginTop: 0, background:'#006915ff', color:'#fff', fontWeight:600, fontSize:'1rem', borderRadius:8, border:'none', padding:'0.7rem 0', outline:'none'}}
+                onClick={handleSendClick}
+                aria-label="Enviar pedido por WhatsApp"
+                tabIndex={0}
+              >Enviar pedido por WhatsApp</button>
+              <button
+                className="close-modal"
+                style={{width: '100%', marginTop: 8, background: '#232526', color: '#fff', fontWeight:600, fontSize:'1rem', borderRadius:8, border:'none', padding:'0.7rem 0', outline:'none'}}
+                onClick={() => setShowCart(false)}
+                aria-label="Cerrar carrito"
+                tabIndex={0}
+              >Cerrar</button>
+            </div>
           </div>
         </div>
       )}
